@@ -1,0 +1,35 @@
+{
+  "name": "noo",
+  "version": "0.0.1",
+  "description": "Personal Website of @nozgurozturk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nozgurozturk/noo.git"
+  },
+  "keywords": [
+    "personal",
+    "web",
+    "page",
+    "noo"
+  ],
+  "author": "@nozgurozturk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nozgurozturk/noo/issues"
+  },
+  "homepage": "https://github.com/nozgurozturk/noo#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.5.0",
+    "node-sass": "^4.14.1",
+    "terser-webpack-plugin": "^4.2.2",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
