@@ -1,0 +1,9 @@
+@import "./variables";
+
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+    color: $text-primary;
+  } @else {
+    color: $white;
+  }
+}

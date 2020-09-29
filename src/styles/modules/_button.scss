@@ -1,0 +1,15 @@
+@import "../base/variables";
+
+.button--solid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 32px;
+  padding: 8px;
+  background-color: $primary;
+  color: $white;
+  &:active {
+    background-color: $secondary;
+  }
+}

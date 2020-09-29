@@ -1,0 +1,80 @@
+@import "../base/variables";
+
+header {
+  display: flex;
+  flex-direction: column;
+  .stalk--link-container {
+    display: flex;
+    flex-direction: column;
+    & > div {
+      display: none;
+      margin-top: 8px;
+    }
+  }
+}
+
+.toggle-theme {
+  position: absolute;
+  top: 42px;
+  right: 16px;
+  background: transparent;
+  i {
+    font-size: 24px;
+    color: $black;
+    transition: all 0.6s ease-in-out;
+    transform: rotate(0deg);
+  }
+  &:hover i {
+    transition: all 0.6s ease-in-out;
+    color: $primary;
+  }
+}
+
+body.dark {
+  .toggle-theme {
+    i {
+      color: $white;
+      transition: all 0.6s ease-in-out;
+      transform: rotate(180deg);
+    }
+    &:hover i {
+      transition: all 0.6s ease-in-out;
+      color: $primary;
+    }
+  }
+}
+
+@media (min-width: $layout-breakpoint-medium) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    .intro {
+      p {
+        max-width: 480px;
+      }
+    }
+    .stalk--link-container {
+      h5 {
+        font-size: $h6;
+      }
+      align-items: flex-end;
+      text-align: right;
+      & > div {
+        display: initial;
+      }
+    }
+  }
+  .toggle-theme {
+    position: initial;
+  }
+}
+
+@media (min-width: $layout-breakpoint-large) {
+  header {
+    .intro {
+      p {
+        max-width: 560px;
+      }
+    }
+  }
+}

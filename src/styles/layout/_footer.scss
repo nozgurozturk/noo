@@ -1,0 +1,12 @@
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: $layout-breakpoint-large) {
+  footer {
+    display: none;
+  }
+}

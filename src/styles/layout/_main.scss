@@ -1,0 +1,18 @@
+@import "../base/variables";
+
+main {
+  & > h5 {
+    padding: 16px 0px;
+  }
+}
+.project--container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(326px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: $layout-breakpoint-large) {
+  .project--container {
+    gap: 24px;
+  }
+}

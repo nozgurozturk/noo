@@ -1,0 +1,51 @@
+@import "../base/variables";
+
+.link {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 112px;
+  height: 24px;
+  padding: 8px 0px;
+  color: inherit;
+  cursor: pointer;
+  & i {
+    color: inherit;
+    transition: all 0.4s ease-in-out;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: $gray;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: left 0.4s ease-in-out;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: $primary;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  &:hover div {
+    transition: color 0.4s ease-in-out;
+    color: $primary;
+  }
+  &:hover i {
+    transition: all 0.4s ease-in-out;
+    color: $primary;
+    transform: translate(4px, -4px);
+  }
+  &:hover::after {
+    transition: left 0.4s ease-in-out;
+    left: 100%;
+  }
+}
