@@ -1,5 +1,7 @@
-require('dotenv').config()
+const path = require('path')
 const got = require('got')
+
+require('dotenv').config({path: path.resolve(process.cwd(), '../.env')})
 /**
  * @namespace Github
  * @description Github GraphQL API Provider
