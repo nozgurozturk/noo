@@ -8,6 +8,8 @@ module.exports = (env) => {
         mode: process.env.NODE_ENV,
         entry: {
           main: './src/index.js',
+          theme: './src/theme/index.js',
+          glitch: './src/glitch/index.js',
         },
         devtool: process.env.NODE_ENV == 'production' ? false : 'source-map',
         devServer: {
@@ -16,9 +18,8 @@ module.exports = (env) => {
           port: 3000
         },
         output: {
-            path: `${__dirname}/dist/`,
+            path: path.join(__dirname, 'dist'),
             filename: 'js/[name].js',
-            publicPath:'/',
             sourceMapFilename: '[name].map.js'
         },
         optimization: {
@@ -61,6 +62,15 @@ module.exports = (env) => {
                     },
                   ],
                 },
+                {
+                  test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+                  loader: 'file-loader',
+                  options: {
+                    publicPath: '../assets/fonts/',
+                    outputPath: '/assets/fonts/',
+                    name: '[name].[ext]',
+                  },
+                },
             ]
         },
         plugins: [
@@ -70,7 +80,6 @@ module.exports = (env) => {
           }),
           new MiniCssExtractPlugin({
             filename: 'css/style.css',
-            publicPath:'/',
             chunkFilename: '[id].css',
           }),
         ]
