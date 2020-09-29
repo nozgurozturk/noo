@@ -1,2 +1,1 @@
-import './styles/index.scss'
-console.log('Hello Ozgur')
+import "./styles/index.scss"
