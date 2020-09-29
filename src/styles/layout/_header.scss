@@ -11,6 +11,42 @@ header {
       margin-top: 8px;
     }
   }
+  .intro {
+    a {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      color: inherit;
+      cursor: pointer;
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        background-color: $gray;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: left 0.4s ease-in-out;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        height: 1px;
+        background-color: $primary;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      &:hover {
+        transition: color 0.4s ease-in-out;
+        color: $primary;
+      }
+      &:hover::after {
+        transition: left 0.4s ease-in-out;
+        left: 100%;
+      }
+    }
+  }
 }
 
 .toggle-theme {
