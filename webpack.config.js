@@ -8,6 +8,7 @@ module.exports = (env) => {
         mode: process.env.NODE_ENV,
         entry: {
           main: './src/index.js',
+          content: './src/content/index.js',
           theme: './src/theme/index.js',
           glitch: './src/glitch/index.js',
         },
@@ -38,9 +39,16 @@ module.exports = (env) => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                '@babel/preset-env'
+                          presets: [
+                              '@babel/preset-env'
+                          ],
+                          plugins: [
+                            ["@babel/plugin-transform-runtime",
+                              {
+                                regenerator: true
+                              }
                             ]
+                          ]
                         }
                     }
                 },
@@ -76,7 +84,8 @@ module.exports = (env) => {
         plugins: [
           new HTMLWebpackPlugin({
             filename: 'index.html',
-            template: `${__dirname}/index.html`
+            template: `${__dirname}/index.html`,
+            scriptLoading: 'defer'
           }),
           new MiniCssExtractPlugin({
             filename: 'css/style.css',
