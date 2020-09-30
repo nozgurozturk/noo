@@ -1,18 +1,34 @@
 import { Shape } from './shapes'
+
 class Glitch {
   constructor(el) {
       this.canvas = document.getElementById(el)
       this.contex = this.canvas.getContext('2d')
-      this.duration = 1800
+      this.color = null;
+      this.shapeArray = []
+      this.grid = [0, 0]
       this.row = 0
+      this.col = 0
+      this.startTime = undefined;
+      this.duration = 1.8
+      this.shapeSize = 64
+      this.threshold = 4
       this.RAF = requestAnimationFrame(()=>{})
       this.resizeCanvas()
       this.eventListeners()
+
+  }
+
+  calculateDuration() {
+      const totalRect = this.grid[0] * this.grid[1]
+      this.duration = (totalRect / 60) / 2
   }
 
   resizeCanvas() {
       this.canvas.height = window.innerHeight
       this.canvas.width = window.innerWidth
+      this.createGrid()
+    this.calculateDuration()
       return this
   }
 
@@ -24,57 +40,90 @@ class Glitch {
       }, 400);
   }
 
-  setAnimationDuration(duration) {
-      this.duration = duration
-      return this
-  }
-
   clearCanvas() {
       this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height);
       return this
   }
 
-  createPattern(row) {
-      const color = document.body.classList.contains('dark') ? 250 : 22
-      for (let column = 0; column < row + 1; column++) {
-          const rect = new Shape(8)
-          rect.setColor(color,color,color)
-          const posX = rect.setPosition(row, 32)
-          const posY = rect.setPosition(column, 32)
-          const randomX = Math.floor(Math.random() * (this.canvas.width / 2) * (Math.sin(Math.random())))
-          const randomY = Math.floor(Math.random() * (this.canvas.height / 2) * (Math.sin(Math.random())))
-          this.contex.fillStyle = rect.color 
-          this.contex.fillRect(((this.canvas.width / 2) + randomX - posX), ((this.canvas.height / 2) - randomY + posY), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) + randomX - posX), ((this.canvas.height / 2) + randomY - posY), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) + randomY - posY), ((this.canvas.height / 2) - randomX + posX), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) + randomY - posY), ((this.canvas.height / 2) + randomX - posX), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) - randomX + posX), ((this.canvas.height / 2) - randomY + posY), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) - randomX + posX), ((this.canvas.height / 2) + randomY - posY), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) - randomY + posY), ((this.canvas.height / 2) - randomX + posX), rect.size, rect.size)
-          this.contex.fillRect(((this.canvas.width / 2) - randomY + posY), ((this.canvas.height / 2) + randomX - posX), rect.size, rect.size)
-      }
-      
-  }
+  createGrid() {
+    const _shapes = []
+        
+      this.grid = [Math.floor(this.canvas.width / this.shapeSize) + 1, Math.floor(this.canvas.height / this.shapeSize) + 1]
 
+      for (let x = 0; x < this.grid[0]; x++) {
+        const _row = []
+          for (let y = 0; y < this.grid[1]; y++) {
+              const rect = new Shape(this.shapeSize)
+              
+              rect.setPositionX(x, this.threshold)
+              rect.setPositionY(y, this.threshold)
+              _row.push(rect)
+            }
+        _shapes.push(_row) 
+      }
+
+      this.shapeArray = _shapes
+
+      console.log(_shapes)
+  }
+  createGridAnimation(isReverse) {
+
+        const x = this.col + this.row
+        const y = this.col
+
+        const lx = isReverse ? this.grid[0] - 1 : 0
+        const ly = isReverse ? this.grid[1] - 1 : 0
+
+        const xDir1 = Math.abs(lx - Math.min(x, this.grid[0] - 1))
+        const yDir1 = Math.abs(ly - Math.min(y, this.grid[1] - 1))
+        
+        const xDir2 = Math.abs(lx - Math.min(y, this.grid[0] - 1))
+        const yDir2 = Math.abs(ly - Math.min(x, this.grid[1] - 1))
+ 
+        const rect1 = this.shapeArray[xDir1][yDir1]
+        const rect2 = this.shapeArray[xDir2][yDir2]
+        
+
+        const col  = Math.abs(this.color -  x * y) 
+        
+        rect1.setColor(col, col, col)
+
+        this.contex.fillStyle = rect1.color
+        this.contex.fillRect(rect1.x , rect1.y , rect1.size, rect1.size)
+        this.contex.fillRect(rect2.x , rect2.y , rect2.size, rect2.size)
+
+        if (this.row >= this.grid[0] - 1) {
+            this.row = -1
+            this.col++
+        }
+  }
   cancelAnimation() {
       this.row = 0
+      this.col = 0
+      this.startTime = undefined
       cancelAnimationFrame(this.RAF)
   }
 
+  
+
   animate() {
-      this.RAF = requestAnimationFrame(() => this.render());
+    this.RAF = requestAnimationFrame(this.render.bind(this));
   }
-
   render(timestamp = 0) {
-      var start = Date.now()
-      if (!start) start = timestamp;
-      var progress = timestamp - start;
+    if (!this.startTime) this.startTime = timestamp;
+    const timeElapsed = timestamp - this.startTime;
+    const progress = timeElapsed  / 1000
 
-      if (progress < this.duration) {
-          this.createPattern(this.row)
-          this.row++
-          this.RAF = requestAnimationFrame(() => this.render());
-      }
+    const fixedProgress = progress.toFixed(3)
+
+    if (fixedProgress < this.duration) {
+        this.createGridAnimation()
+        this.createGridAnimation(true)
+
+        this.RAF = requestAnimationFrame(this.render.bind(this));
+        this.row++
+    }
+      
   }
   eventListeners() {
 
@@ -85,14 +134,14 @@ class Glitch {
               this.canvas.classList.remove('hidden')
           }
           this.animate()
-          const color = document.body.classList.contains('dark') ? 250 : 22
+          this.color = document.body.classList.contains('dark') ? 250 : 22
        
           setTimeout(() => {
-              this.contex.fillStyle = `rgba(${color}, ${color}, ${color}, 1)`
+              this.contex.fillStyle = `rgba(${this.color}, ${this.color}, ${this.color}, 1)`
               this.contex.fillRect(0, 0, this.canvas.width, this.canvas.height);
               this.toogleCanvas()
               document.body.classList.toggle('dark')
-          }, this.duration * 0.8)
+          }, this.duration * 1000 - 200)
       })
       window.addEventListener('resize', this.resizeCanvas.bind(this), false)
   }
