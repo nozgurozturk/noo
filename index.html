@@ -9,18 +9,14 @@
 
 <body>
   <header>
-    <section class="intro">
-      <h4>Hi 👋, I'm <a href="#">Ozgur</a></h4>
-      <p>I am Frontend Developer with 2+ years of practical experience in SPAs, JavaScript/ES6/ES2017 and Node.js</p>
-      <p>I am currently working at <a href="https://www.proj-e.com">Proj-e</a></p>
-    </section>
+    <section class="intro"></section>
     <section class="stalk--link-container">
       <button class="toggle-theme">
         <i class="icon-brightness-contrast"></i>
       </button>
       <ul>
         <li>
-          <a href="https://www.github.com/nozgurozturk" class="link">
+          <a href="https://www.github.com/nozgurozturk" target="_blank" class="link">
             <div>
               Github
             </div>
@@ -28,7 +24,7 @@
           </a>
         </li>
         <li>
-          <a href="https://www.lindkedin.com/in/nozgurozturk" class="link">
+          <a href="https://www.lindkedin.com/in/nozgurozturk" target="_blank" class="link">
             <div>
               Linkedin
             </div>
@@ -49,26 +45,7 @@
   </header>
   <main>
     <h5>Personal Projects</h5>
-    <section class="project--container">
-      <article class="project">
-        <div class="project--content">
-          <h6>Project Name</h6>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellendus in quo cum. Fuga cumque
-            sunt eaque, fugiat minima culpa corporis at inventore ex totam ipsam quia quo dolores rem.</p>
-        </div>
-        <div class="project--info">
-          <p>Project Type</p>
-          <ul>
-            <li>
-              <a href="#" class="link">
-                <div>Source</div>
-                <i class="icon-arrow--up-right"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </article>
-    </section>
+    <section class="project--container"></section>
   </main>
   <footer>
     <a href="mailto:ozgur@nozgurozturk.com" class="link">
@@ -77,6 +54,32 @@
     </a>
   </footer>
   <canvas id="glitch"></canvas>
+  <template id="project-template">
+    <article class="project">
+      <div class="project--content">
+        <h6>{{ projectName }}</h6>
+        <p>{{ projectDescription }}</p>
+        <ul class="project--languages"></ul>
+      </div>
+      <div class="project--info">
+        <ul class="project--links"></ul>
+      </div>
+    </article>
+  </template>
+  <template id="project--links-template">
+    <li>
+      <a href="#" target="_blank" class="link">
+        <div> {{type }} </div>
+        <i class="icon-arrow--up-right"></i>
+      </a>
+    </li>
+  </template>
+  <template id="project--languages-template">
+    <li>
+      <span></span>
+      <span> {{ language }} </span>
+    </li>
+  </template>
 </body>
 
 </html>
