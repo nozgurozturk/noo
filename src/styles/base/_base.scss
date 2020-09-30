@@ -9,15 +9,27 @@
   display: none;
 }
 
+header,
+main,
+footer {
+  margin: 0 auto;
+  padding: 24px 16px;
+  max-width: $layout-breakpoint-small;
+}
+
 @media (min-width: $layout-breakpoint-medium) {
-  body {
+  header,
+  main,
+  footer {
     max-width: $layout-breakpoint-medium;
     padding: 36px 24px;
   }
 }
 
 @media (min-width: $layout-breakpoint-large) {
-  body {
+  header,
+  main,
+  footer {
     max-width: $layout-breakpoint-large;
     padding: 48px 24px;
   }

@@ -1,20 +1,68 @@
-article {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 1px solid $black;
+.project {
+  border: 1px solid $gray;
+  border-radius: 8px;
   padding: 16px;
+  transition: border 400ms;
+  &:hover {
+    transition: border 400ms;
+    border: 1px solid transparentize($color: $primary, $amount: 0.4);
+  }
   &:last-of-type {
     margin-bottom: none;
   }
   p {
     font-size: $content-secondary;
-    max-width: 192px;
+    max-width: 280px;
   }
-  .project--info {
+  &--content {
+    padding-right: 16px;
+  }
+  &--info {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     justify-content: space-between;
+  }
+  &--languages {
+    display: inline-flex;
+    flex-wrap: wrap;
+    li {
+      margin-right: 8px;
+      span:nth-of-type(1) {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      span:nth-of-type(2) {
+        font-size: 10px;
+      }
+    }
+  }
+  &--links {
+    display: flex;
+    li {
+      margin-right: 16px;
+      a {
+        font-size: 14px;
+        width: 80px;
+        padding: 4px 0px;
+      }
+    }
+  }
+}
+
+@media (min-width: $layout-breakpoint-medium) {
+  .project {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &--links {
+      display: initial;
+      li {
+        margin-right: 0px;
+      }
+    }
   }
 }

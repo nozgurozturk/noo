@@ -3,6 +3,7 @@
 header {
   display: flex;
   flex-direction: column;
+  margin-top: 48px;
   .stalk--link-container {
     display: flex;
     flex-direction: column;
@@ -50,7 +51,7 @@ header {
 }
 
 .toggle-theme {
-  position: absolute;
+  position: fixed;
   top: 42px;
   right: 16px;
   background: transparent;

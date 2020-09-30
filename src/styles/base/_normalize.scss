@@ -4,12 +4,11 @@
 body {
   @include theme-colors($light-theme: true);
   background-color: $white;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 24px 16px;
-  max-width: $layout-breakpoint-small;
   box-sizing: content-box;
   font-size: $content-main;
   line-height: 1.5;

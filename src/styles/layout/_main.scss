@@ -7,12 +7,13 @@ main {
 }
 .project--container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(326px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(246px, 1fr));
   gap: 16px;
 }
 
 @media (min-width: $layout-breakpoint-large) {
   .project--container {
+    grid-template-columns: repeat(auto-fill, minmax(326px, 1fr));
     gap: 24px;
   }
 }
