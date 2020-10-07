@@ -8,6 +8,7 @@ module.exports = (env) => {
         mode: process.env.NODE_ENV,
         entry: {
           main: './src/index.js',
+          analytics: './src/analytics/index.js',
           content: './src/content/index.js',
           theme: './src/theme/index.js',
           glitch: './src/glitch/index.js',
