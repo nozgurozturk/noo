@@ -5,7 +5,7 @@ const traceActions = {
   click: 2,
   reveal: 3
 }
-const links = document.getElementsByTagName('a')
+
 
 class Tracer {
 
@@ -44,6 +44,7 @@ class Tracer {
     }
   }
   static linkClick () {
+    const links = document.getElementsByTagName('a')
     for (const link of links) {
       link.addEventListener('click', async () => {
         try {
