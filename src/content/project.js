@@ -89,6 +89,7 @@ class ProjectLink {
     const typeElement = node.querySelector('div')
 
     anchorElement.setAttribute('href', this.url)
+    anchorElement.setAttribute('data-tag',this.name)
     typeElement.textContent = this.name
 
     return node
